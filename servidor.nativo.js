@@ -7,17 +7,19 @@ const tareas = [
   { id: 2, titulo: "Aprender Express", completado: false }
 ];
 
-const servidor = http.createServer((req, res) => {
+// url/api/createtareas  Incorrecto
+// url/api/tareas GET , POST, PUT, DELETE
+const servidor = http.createServer((req, res) => { // req request y resp . response o respuesta
   const parsedUrl = url.parse(req.url, true);
   const partes = parsedUrl.pathname.split("/");
-
+  console.log("Ruta solicitada:", parsedUrl.pathname);
   if (req.method === "GET" && parsedUrl.pathname === "/") {
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.end("<h1>Servidor Node.js Nativo Activo</h1>");
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" }); // estructura de la respuesta,es un html, se coloca en el header
+    res.end("<h1 style='color: blue;'>Servidor Node.js Nativo Activo</h1>");
   } 
   
   else if (req.method === "GET" && parsedUrl.pathname === "/api/tareas") {
-    res.writeHead(200, { "Content-Type": "application/json" });
+    res.writeHead(200, { "Content-Type": "application/json" }); // respouesta en json 
     res.end(JSON.stringify(tareas));
 
   }
